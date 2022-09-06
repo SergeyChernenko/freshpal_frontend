@@ -35,7 +35,7 @@ const routes = [
     component: Messenger
   },
   {
-    path: '/new',
+    path: '/sub',
     name: 'Subscriptions',
     component: Home
   },

@@ -46,7 +46,7 @@
                                                 <lightbox css="h-lg-400" :items="data_mess.images" :cells="3"></lightbox>
                                             </div>
                                         </div>
-                                        <div style="margin-top: 15px" class="just-line-break">
+                                        <div style="margin-top: 15px; max-width: 510px" class="text_publ">
                                             <div v-html="data_mess.message"></div>
                                         </div>
                                         <div style="display: flex; margin-top: 12px" class="just-line-break">
@@ -81,13 +81,25 @@
                                         <p style="margin: 50px; margin-bottom: 50px" class="text_style_2">Публикация удалена</p>
                                     </div>
                                     <hr>
-
+                                    <div id="div_load_com_status" style="display: none">
+                                        <div style="margin-top: 25px; height: 30px" class="vld-parent">
+                                            <loading :active.sync="isLoadingCom"
+                                            :is-full-page="false"
+                                            :heigh="30"
+                                            :width="30"
+                                            color="#40ff40"
+                                            :opacity="0"
+                                            ></loading>
+                                        </div>
+                                        <p style="margin-top: 20px" class="text_style_2">Подождите, пожалуйста! Идет загрузка публикации.</p>
+                                    </div>
                                     <div style="display: flex">
-                                         <Textarea
-                                             @message="SavePubl"
+                                        <Textarea
+                                             @message="SaveCom"
                                              :description="description"
                                              :username_id="username.username_id"
                                              :edit="false"
+                                             :limit="400"
                                          />
                                     </div>
                                     <div v-if="all_comment.length > 0">
@@ -128,7 +140,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div style="margin-top: 10px" class="just-line-break">
+                                            <div style="margin-top: 10px; max-width: 510px" class="text_publ">
                                                 <div v-html="mess.message"></div>
                                             </div>
 
@@ -159,6 +171,18 @@
                                 </div>
 
                                 <div v-if="edit==true">
+                                    <div id="div_load_publ_status" style="display: none">
+                                        <div style="margin-top: 25px; height: 30px" class="vld-parent">
+                                            <loading :active.sync="isLoadingPubl"
+                                            :is-full-page="false"
+                                            :heigh="30"
+                                            :width="30"
+                                            color="#40ff40"
+                                            :opacity="0"
+                                            ></loading>
+                                        </div>
+                                        <p style="margin-top: 20px" class="text_style_2">Подождите, пожалуйста! Идет загрузка публикации.</p>
+                                    </div>
                                     <Textarea
                                      @save_edit="save_edit_publ"
                                      @cancel_edit="cancel_edit_mess"
@@ -166,7 +190,8 @@
                                      :username_id="Number(data_mess.username_id)"
                                      :edit="true"
                                      :message_edit="clean_mess"
-                                     :images = "data_mess.images"/>
+                                     :images = "data_mess.images"
+                                     :limit="2000"/>
                                 </div>
                             </div>
                             <div v-if="check_publ == false">
@@ -271,6 +296,8 @@
                 stop_close: true,
                 stop_close_comment: true,
                 type_comment: true,
+                isLoadingPubl: false,
+                isLoadingCom: false,
             }
         },
         methods: {
@@ -508,9 +535,11 @@
                 }
             },
 
-            SavePubl(comment,images){
+            SaveCom(comment,images){
                 if (comment != '' || images.length != 0){
                     this.stop_get_comment = 10
+                    this.isLoadingCom = true
+                    document.getElementById("div_load_com_status").style.display = "block"
                     this.last_datetime = null
                     this.all_comment = []
                     axios.post(this.$hostname + '/api/mainpage/publ/save_comment/', {
@@ -525,6 +554,8 @@
                         }
                     })
                       .then(res => {
+                          this.isLoadingCom = false
+                          document.getElementById("div_load_com_status").style.display = "none"
                           this.get_comment()
                       })
                 }
@@ -554,6 +585,8 @@
             },
 
             save_edit_publ(message,images){
+                this.isLoadingPubl = true
+                document.getElementById("div_load_publ_status").style.display = "block"
                 axios.post(this.$hostname + '/api/mainpage/publ/save_edit_publ/', {
                     message: message,
                     images: images,
@@ -566,6 +599,8 @@
                     }
                 })
                   .then(res => {
+                    this.isLoadingPubl = false
+                    document.getElementById("div_load_publ_status").style.display = "none"
                     location.reload()
                   })
             },

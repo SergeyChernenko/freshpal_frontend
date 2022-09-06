@@ -47,8 +47,8 @@
         </div>
         <div style="display: flex">
             <div style="flex-grow: 1;"></div>
-            <div style="margin: 15px 15px 0px 0px" v-if="description != null">
-                <span v-if="description.length <= 400" class="message-counter">{{ description.length}} / {{limit}}</span>
+            <div style="margin: 15px 15px 0px 0px">
+                <span class="message-counter">{{ description.length}} / {{limit}}</span>
             </div>
             <span v-if="result_des == true" style="margin: 15px 10px 0px 0px; color: #40ff40;">Сохранено</span>
             <button class="button_style child-active" v-on:click="save_description">Сохранить</button>
@@ -108,7 +108,7 @@ export default {
             res_old_password : null,
             res_new_password: null,
             emoji_mes: '',
-            limit: 300,
+            limit: 400,
         }
     },
     props: {

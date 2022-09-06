@@ -13,7 +13,7 @@
                     </LeftMenu>
                 </div>
                 <div class="home_style">
-                    <div v-if="url == 'new'">
+                    <div v-if="url == 'sub'">
                         <Subscriptions
                             :username="username">
                         </Subscriptions>

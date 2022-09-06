@@ -17,7 +17,7 @@
             </div>
         </div>
         <div style="margin-top: 30px" v-if="activity == 'like'">
-            <div id="div_like" style="margin-top: 25px; height: 30px" class="vld-parent">
+            <div id="div_load_like" style="margin-top: 25px; height: 30px" class="vld-parent">
                 <loading :active.sync="isLoadingLike"
                 :is-full-page="false"
                 :heigh="30"
@@ -40,9 +40,21 @@
                     </div>
                 </div>
             </div>
+            <div style="display: none" id="no_like_men">
+                <p style="margin-top: 70px" class="text_style_2">У вас пока нет лайков</p>
+            </div>
             <div v-observe-visibility="handleScrolledToBottom_like"></div>
         </div>
         <div style="margin-top: 30px"  v-if="activity == 'sub'">
+            <div id="div_load_sub" style="margin-top: 25px; height: 30px" class="vld-parent">
+                <loading :active.sync="isLoadingSub"
+                :is-full-page="false"
+                :heigh="30"
+                :width="30"
+                color="#40ff40"
+                :opacity="0"
+                ></loading>
+            </div>
             <div v-for="sub in subs">
                 <div style="display: flex; margin-bottom: 20px">
                     <a class="sub_link" v-on:click.middle.stop="go_page(sub.subscriber__username, true)" v-on:click.stop="go_page(sub.subscriber__username, false)">
@@ -54,6 +66,9 @@
                         подписался(ась) на вас {{sub.datetime}}
                     </div>
                 </div>
+            </div>
+            <div style="display: none" id="no_sub_men">
+                <p style="margin-top: 70px" class="text_style_2">У вас пока нет подписчиков</p>
             </div>
             <div v-observe-visibility="handleScrolledToBottom_sub"></div>
         </div>
@@ -89,10 +104,12 @@ export default {
             count_sub: 0,
             count_men: 0,
             isLoadingLike: false,
+            isLoadingSub: false,
         }
     },
     props: {
         username: Object,
+        type_men: String,
     },
 
     methods: {
@@ -171,6 +188,8 @@ export default {
                             res.data[i].datetime = moment(res.data[i].datetime).format('DD.MM.YY')
                       }
                       this.subs.push(...res.data);
+                      this.isLoadingSub = false
+                      document.getElementById("div_load_sub").style.display = "none"
 
                   }
               });
@@ -197,8 +216,10 @@ export default {
                       }
                       this.likes.push(...res.data);
                       this.isLoadingLike = false
+                      document.getElementById("div_load_like").style.display = "none"
                   }
               });
+
         },
 
         get_count(){
@@ -223,30 +244,51 @@ export default {
               });
           },
 
+        no_load_like(){
+            if (this.likes.length == 0){
+                document.getElementById("no_like_men").style.display = "block"
+                document.getElementById("div_load_like").style.display = "none"
+                this.isLoadingLike = false
+            }
+        },
+
+        no_load_sub(){
+            if (this.subs.length == 0){
+                document.getElementById("no_sub_men").style.display = "block"
+                document.getElementById("div_load_sub").style.display = "none"
+                this.isLoadingSub = false
+            }
+        },
+
     },
     created() {
-        this.isLoadingLike = true
+        document.title = 'Активность'
         let arr = new Array();
         const encoded = decodeURI(this.url);
         arr = encoded.split('/')
         if (arr[arr.length-1] != 'activity'){
             this.url = arr[arr.length-1]
+            if (this.url == 'like'){
+                this.isLoadingLike = true
+                this.get_like()
+                setTimeout( this.no_load_like, 800);
+            }
+            if (this.url == 'sub'){
+                this.isLoadingSub = true
+                this.get_sub()
+                setTimeout( this.no_load_sub, 800);
+            }
+            if (this.url == 'mention'){
+                this.get_men()
+            }
+            this.get_count()
+            this.last_visit()
         }
         else{
-            this.url = 'like'
+            var url_page = '/activity/like';
+            this.$router.push(url_page).catch(()=>{});
         }
-        if (this.url == 'like'){
-            this.get_like()
-        }
-        if (this.url == 'sub'){
-            this.get_sub()
-        }
-        if (this.url == 'mention'){
-            this.get_men()
-        }
-        this.get_count()
-        this.last_visit()
-        setTimeout( this.isLoadingLike = false, 500);
+
     },
     filters: {
         number: function(num) {

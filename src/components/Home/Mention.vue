@@ -12,6 +12,15 @@
             </div>
         </div>
         <div v-if="activity == 'publ'">
+            <div id="div_load_publ" style="margin-top: 25px; height: 30px; display: block" class="vld-parent">
+                <loading :active.sync="isLoadingPub"
+                :is-full-page="false"
+                :heigh="30"
+                :width="30"
+                color="#40ff40"
+                :opacity="0"
+                ></loading>
+            </div>
             <div v-for="(mess,index) in mention_publ">
                 <div style="margin-bottom: 10px" class="border_st public_status" v-on:click.middle="status(mess.publ_username, mess.publ_id, true)" v-on:click="status(mess.publ_username, mess.publ_id, false)">
                     <div class="space-edit">
@@ -34,7 +43,7 @@
                             <lightbox css="h-lg-400" :items="mess.images" :cells="3"></lightbox>
                         </div>
                     </div>
-                    <div style="margin-top: 10px" class="just-line-break">
+                    <div style="margin-top: 10px; max-width: 510px" class="text_publ">
                         <div v-html="mess.message"></div>
                     </div>
 
@@ -60,11 +69,23 @@
                     </div>
                 </div>
             </div>
+            <div id="no_pub_men" style="display: none">
+                <p style="margin-top: 80px" class="text_style_2">Вас пока не упомянули в публикациях</p>
+            </div>
             <div v-observe-visibility="handleScrolledPubl"></div>
             <div style="height: 5px"></div>
         </div>
 
         <div v-if="activity == 'comment'">
+            <div id="div_load_com" style="margin-top: 25px; height: 30px; display: block" class="vld-parent">
+                <loading :active.sync="isLoadingCom"
+                :is-full-page="false"
+                :heigh="30"
+                :width="30"
+                color="#40ff40"
+                :opacity="0"
+                ></loading>
+            </div>
             <div v-for="(mess,index) in mention_comment">
                 <div style="margin-bottom: 10px" class="border_st public_status" v-on:click.middle="status(mess.publ_username, mess.publ_id, true)" v-on:click="status(mess.publ_username, mess.publ_id, false)">
                     <div class="space-edit">
@@ -113,6 +134,9 @@
                     </div>
                 </div>
             </div>
+            <div id="no_com_men" style="display: none">
+                <p style="margin-top: 80px" class="text_style_2">Вас пока не упомянули в комментариях</p>
+            </div>
             <div v-observe-visibility="handleScrolledComment"></div>
             <div style="height: 5px"></div>
         </div>
@@ -156,6 +180,8 @@ export default {
                 level_user: null,
                 positive_user: null,
             },
+            isLoadingPub: false,
+            isLoadingCom: false,
         }
     },
     props: {
@@ -327,6 +353,7 @@ export default {
 
         get_publ(){
             this.activity = 'publ'
+            this.isLoadingPub = true
             this.mention_comment = []
             this.stop_get_comment = 15
             this.datetime_comment = null
@@ -349,13 +376,17 @@ export default {
                             res.data[i].publ_datetime = moment(res.data[i].publ_datetime).format('DD.MM.YY')
                           }
                           this.mention_publ.push(...res.data);
+                          this.isLoadingPub = false
+                          document.getElementById("div_load_publ").style.display = "none"
                       }
                   });
             }
+            setTimeout( this.no_load_pub, 800);
         },
 
         get_comment(){
             this.activity = 'comment'
+            this.isLoadingCom = true
             this.mention_publ = []
             this.stop_get_publ = 15
             this.datetime_publ = null
@@ -378,16 +409,33 @@ export default {
                             res.data[i].publ_datetime = moment(res.data[i].publ_datetime).format('DD.MM.YY')
                           }
                           this.mention_comment.push(...res.data);
+                          this.isLoadingCom = false
+                          document.getElementById("div_load_com").style.display = "none"
                       }
                   });
             }
-        }
+            setTimeout( this.no_load_com, 800);
+        },
+        no_load_pub(){
+            if (this.mention_publ.length == 0){
+                document.getElementById("no_pub_men").style.display = "block"
+                document.getElementById("div_load_publ").style.display = "none"
+                this.isLoadingPub = false
+            }
+        },
+
+        no_load_com(){
+            if (this.mention_comment.length == 0){
+                document.getElementById("no_com_men").style.display = "block"
+                document.getElementById("div_load_com").style.display = "none"
+                this.isLoadingCom = false
+            }
+        },
 
 
     },
     created() {
         this.get_publ()
-
     },
     filters: {
         number: function(num) {

@@ -32,7 +32,7 @@
                             <lightbox css="h-lg-400" :items="mess.images" :cells="3"></lightbox>
                         </div>
                     </div>
-                    <div style="margin-top: 10px" class="just-line-break">
+                    <div style="margin-top: 10px; max-width: 510px" class="text_publ">
                         <div v-html="mess.message"></div>
                     </div>
 

@@ -4,7 +4,7 @@
 	<div class="center">
 		<div class="parent">
 			<div class="logo">
-				<img style="margin-top: 30px; width: 90%" :src="url+'/media/logo_company.svg'">
+				<img style="margin-top: 30px; width: 90%" :src="$hostname+'/media/logo_company.svg'">
 				<div style="margin-top: 50px">
 					<p class="text_startpage">Социальная сеть, с новой, обдуманной системой оценки пользователей.
 						У каждого пользователя, у каждой публикации есть свой социальный рейтинг.
@@ -27,7 +27,6 @@
 					<p style="margin-top: 10px" class="text_startpage">Нас уже - {{count_users}}. Так чего же ты ждешь? Присоединяйся скорее! 😎</p>
 				</div>
 			</div>
-
 
 			<div>
 				<div class="login">
@@ -53,8 +52,6 @@
 // @ is an alias to /src
 import axios from "axios";
 
-
-
 export default {
   name: 'Home',
   components: {
@@ -64,14 +61,29 @@ export default {
 	data() {
       return{
       	access_token: localStorage.getItem('access') || null,
-      	url: this.$hostname,
 		username: null,
 		count_users: null,
+
 	  }
   	},
 
 	methods:{
 
+  		getCookie(name) {
+			let cookieValue = null;
+			if (document.cookie && document.cookie !== '') {
+				const cookies = document.cookie.split(';');
+				for (let i = 0; i < cookies.length; i++) {
+					const cookie = cookies[i].trim();
+					// Does this cookie string begin with the name we want?
+					if (cookie.substring(0, name.length + 1) === (name + '=')) {
+						cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+						break;
+					}
+				}
+			}
+			return cookieValue;
+		},
 
   		get_count_users(){
   			axios.post(this.$hostname + '/api/startpage/users/count/', {
@@ -97,15 +109,23 @@ export default {
 			  .catch(err => {
 			  })
 			},
+		timeout(){
+        if ( this.getCookie('csrftoken') != null ) {
+            console.log(this.getCookie('csrftoken'))
+        } else {
+            setTimeout( this.timeout, 500);
+        }
+    },
 
 	},
 
 	created(){
-
   		this.get_count_users()
 		if (this.access_token != null){
 			this.get_username()
 		}
+		this.timeout()
+
 
 	},
 }

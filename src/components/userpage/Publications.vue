@@ -8,6 +8,7 @@
                     :description="description"
                     :username_id="username.id"
                     :edit="false"
+                    :limit="2000"
                 />
             <hr>
         </div>
@@ -19,6 +20,18 @@
             color="#40ff40"
             :opacity="0"
             ></loading>
+        </div>
+        <div id="div_load_publ" style="display: none">
+            <div style="margin-top: 25px; height: 30px" class="vld-parent">
+                <loading :active.sync="isLoadingPubl"
+                :is-full-page="false"
+                :heigh="30"
+                :width="30"
+                color="#40ff40"
+                :opacity="0"
+                ></loading>
+            </div>
+            <p style="margin-top: 20px" class="text_style_2">Подождите, пожалуйста! Идет загрузка публикации.</p>
         </div>
 
         <div v-for="(mess,index) in all_data">
@@ -39,8 +52,8 @@
                         <lightbox css="h-lg-400" :items="mess.images" :cells="3"></lightbox>
                     </div>
                 </div>
-                <div style="margin-top: 10px" class="just-line-break">
-                    <div style="width: 510px" v-html="mess.message"></div>
+                <div style="margin-top: 10px; max-width: 510px" class="text_publ">
+                    <div v-html="mess.message"></div>
                 </div>
 
                 <div class="flex_like_space">
@@ -117,6 +130,7 @@
             positive_user: null,
         },
         isLoading: false,
+        isLoadingPubl: false,
       }
     },
     props: {
@@ -250,6 +264,8 @@
 
         SavePubl(message,images){
             if (message != '' || images.length != 0){
+                this.isLoadingPubl = true
+                document.getElementById("div_load_publ").style.display = "block"
                 this.stop_get_pudl = 10
                 this.last_datetime = null
                 this.all_data = []
@@ -263,6 +279,8 @@
                     }
                 })
                   .then(res => {
+                      this.isLoadingPubl = false
+                      document.getElementById("div_load_publ").style.display = "none"
                       this.get_publ()
 
                   })

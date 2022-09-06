@@ -434,7 +434,6 @@ export default {
 
     user_check(){
       axios.post(this.$hostname + '/api/mainpage/user_profile/get_username/', {
-
           },
       {
             headers: {
@@ -454,6 +453,7 @@ export default {
       this.user_check()
       this.user_url_check(); //существует ли пользователь
       this.timeout()
+
   },
   filters: {
         number: function(num) {

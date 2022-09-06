@@ -62,7 +62,7 @@
 
 <div class="parent">
     <div style="margin: 8px 15px 0px 0px" v-if="message != null">
-        <span v-if="message.length <= 400" class="message-counter">{{ message.length}} / {{limit}}</span>
+        <span class="message-counter">{{ message.length}} / {{limit}}</span>
     </div>
     <a style="cursor: pointer" v-on:click="image_but"><img width="20" height="20" class="icon_image" :src="$hostname+'/media/image.svg'"></a>
     <button v-if="edit == false" class="button_style child-active_send" style="height: 40px; width: 110px;" v-on:click="send">Отправить</button>
@@ -97,14 +97,13 @@
               message: '',
               emoji_mes: '',
               image_list: [],
-              limit: 400,
             }
           },
           methods: {
 
             lineCount() {
                  var line =  this.message.length ? this.message.split(/\r\n|\r|\n/).length : 0
-                 if(line > 25){
+                 if(line > 30){
                      this.message = this.message.slice(0, -1);
                  }
             },
@@ -254,6 +253,7 @@
         edit: Boolean,
         message_edit: String,
         images: Array,
+        limit: Number,
       },
           directives: {
             focus: {

@@ -6,11 +6,11 @@
             <p v-if="url == username.username" style="color: #36d436;" class="text">Профиль</p>
             <p v-if="url != username.username" class="text">Профиль</p>
         </div>
-        <div class="component_style" v-on:click.middle="go_page('new', true)" v-on:click="go_page('new', false)">
-            <div v-if="url == 'new'" class="div_icon"><img class="icon_style" width="19" height="19" :src="$hostname+'/media/news_gr.svg'"></div>
-            <div v-if="url != 'new'" class="div_icon"><img class="icon_style" width="19" height="19" :src="$hostname+'/media/news.svg'"></div>
-            <p v-if="url == 'new'" style="color: #36d436;"  class="text">Новости</p>
-            <p v-if="url != 'new'" class="text">Новости</p>
+        <div class="component_style" v-on:click.middle="go_page('new', true)" v-on:click="go_page('sub', false)">
+            <div v-if="url == 'sub'" class="div_icon"><img class="icon_style" width="19" height="19" :src="$hostname+'/media/news_gr.svg'"></div>
+            <div v-if="url != 'sub'" class="div_icon"><img class="icon_style" width="19" height="19" :src="$hostname+'/media/news.svg'"></div>
+            <p v-if="url == 'sub'" style="color: #36d436;"  class="text">Подписки</p>
+            <p v-if="url != 'sub'" class="text">Подписки</p>
         </div>
         <div class="component_style" v-on:click.middle="go_page('rec', true)" v-on:click="go_page('rec', false)">
             <div v-if="url == 'rec'" class="div_icon"><img class="icon_style" width="22" height="22" :src="$hostname+'/media/magni_gr.svg'"></div>
@@ -42,10 +42,10 @@
             <p v-if="url == 'support'" style="color: #36d436;" class="text">Поддержка</p>
             <p v-if="url != 'support'" class="text">Поддержка</p>
         </div>
-        <div class="component_style" v-on:click="logout">
-            <div class="div_icon"><img class="icon_style" width="21" height="21" :src="$hostname+'/media/logout.svg'"></div>
-            <p class="text">Выйти</p>
-        </div>
+<!--        <div class="component_style" v-on:click="logout">-->
+<!--            <div class="div_icon"><img class="icon_style" width="21" height="21" :src="$hostname+'/media/logout.svg'"></div>-->
+<!--            <p class="text">Выйти</p>-->
+<!--        </div>-->
     </div>
 </template>
 
@@ -100,7 +100,12 @@ export default {
         url_get(){
             let arr = new Array();
             arr = this.url.split('/')
-            this.url = arr[arr.length-1]
+            if (arr.length == 4){
+                this.url = arr[arr.length-1]
+            }
+            if (arr.length == 5){
+                this.url = arr[arr.length-2]
+            }
         },
 
         get_count(){

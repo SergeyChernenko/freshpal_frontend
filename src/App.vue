@@ -776,6 +776,10 @@ count_tags{
   transform: rotate(45deg);
 }
   /*---*/
-
+.text_publ {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
 
 </style>

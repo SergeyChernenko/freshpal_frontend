@@ -14,7 +14,7 @@
             </div>
             <div style="margin-bottom: 7px" v-for="hash in hashtag">
                 <div style="display: flex" v-on:click.middle="hashtag_page(hash.hashtag, true)" v-on:click="hashtag_page(hash.hashtag, false)" class="border_tag">
-                    <span class="text_tag">{{hash.hashtag | truncate(14, '...')}}</span>
+                    <span class="text_tag">{{hash.hashtag | truncate(18, '...')}}</span>
                     <div style="flex-grow: 1;"></div>
                     <span style="margin-right: 15px; color: #8e8e8e;" class="count_tags">{{ hash.count | number }}</span>
                 </div>

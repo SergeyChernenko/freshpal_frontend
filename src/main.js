@@ -26,7 +26,7 @@ import Mention from "./components/Home/Mention";
 import vClickOutside from 'v-click-outside'
 import Loading from 'vue-loading-overlay';
 
-
+Vue.component('Loading', Loading)
 
 
 
@@ -48,7 +48,7 @@ Vue.component('Donat', Donat)
 Vue.component('Mention', Mention)
 
 
-Vue.component('Loading', Loading)
+
 
 
 
@@ -70,6 +70,7 @@ Vue.filter('truncate', filter);
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 
 Vue.prototype.$hostname = 'http://127.0.0.1:8000'
 Vue.prototype.$localhost = 'http://localhost:8080'
