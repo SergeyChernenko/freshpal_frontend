@@ -139,6 +139,10 @@
     },
     methods: {
 
+        plus_publ(){
+            this.$emit('plus_publ', 1);
+        },
+
         view_update_rating(index){
             this.$emit('update_rating', this.rating_result.level_user, this.rating_result.positive_user);
             this.all_data[index].level = this.rating_result.level_p
@@ -282,6 +286,7 @@
                       this.isLoadingPubl = false
                       document.getElementById("div_load_publ").style.display = "none"
                       this.get_publ()
+                      this.plus_publ()
 
                   })
 

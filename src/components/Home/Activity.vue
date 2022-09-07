@@ -271,12 +271,12 @@ export default {
             if (this.url == 'like'){
                 this.isLoadingLike = true
                 this.get_like()
-                setTimeout( this.no_load_like, 800);
+                setTimeout( this.no_load_like, 1000);
             }
             if (this.url == 'sub'){
                 this.isLoadingSub = true
                 this.get_sub()
-                setTimeout( this.no_load_sub, 800);
+                setTimeout( this.no_load_sub, 1000);
             }
             if (this.url == 'mention'){
                 this.get_men()

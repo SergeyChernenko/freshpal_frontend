@@ -22,6 +22,7 @@ import Hashtag from "./components/Home/Hashtag";
 import Activity from "./components/Home/Activity";
 import Donat from "./components/Other/Donat";
 import Mention from "./components/Home/Mention";
+import Team from "./components/Other/Team";
 
 import vClickOutside from 'v-click-outside'
 import Loading from 'vue-loading-overlay';
@@ -46,6 +47,7 @@ Vue.component('Hashtag', Hashtag)
 Vue.component('Activity', Activity)
 Vue.component('Donat', Donat)
 Vue.component('Mention', Mention)
+Vue.component('Team', Team)
 
 
 

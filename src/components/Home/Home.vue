@@ -48,6 +48,11 @@
                             :username="username">
                         </Donat>
                     </div>
+                    <div v-if="url == 'team'">
+                        <Team
+                            :username="username">
+                        </Team>
+                    </div>
                 </div>
                 <div class="right_menu">
                     <RighMenu/>

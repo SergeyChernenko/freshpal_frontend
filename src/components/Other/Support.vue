@@ -1,47 +1,23 @@
 <template>
     <div>
         <div class="support_div">
-            Привет, дорогой пользователь FreshPal. Данная страница добавлена для тех, кому важно дальнейшее развитие проекта.
-            Мы работаем без внешней поддержки, все своими силами. Ни от кого не зависим! Что дает полную свободу слова.
-            <br>
-            <a style="color: #36d436;" href="/nexus">Моя страница</a> в FreshPal. Мой личный телеграм - <a style="color: #36d436;" href="https://t.me/nexusst">nexusst.</a>
-            Я максимально открыт к вашим сообщениям. &#128522;
-            Все новости будут дублироваться в <a style="color: #36d436;" href="https://t.me/freshpal">телеграм канале.</a>
-            <br>
-            <br>
-            Если вы хотите поддержать нашу команду, реквизиты оставлены внизу.
-            <br>
-            <br>
-            <span style="color: #36d436;">Сбербанк - 4279380020992840 (сбп подключен)</span>
-            <br>
-            <br>
-            В качестве нашей благодарности, мы внесем вас в список донатеров FreshPal.
+            <div class="div_style text">Привет, дорогой пользователь FreshPal. Данная страница добавлена для тех, кому важно дальнейшее развитие проекта.
+            Мы работаем без внешней поддержки, все своими силами. Ни от кого не зависим! Что дает полную свободу слова.</div>
+            <div class="div_style text">Если вы хотите поддержать нашу команду, реквизиты оставлены внизу.</div>
+            <div class="div_style text"><span style="color: #36d436;">Сбербанк - 4279380020992840 (сбп подключен)</span></div>
+            <div class="div_style text">В качестве нашей благодарности, мы внесем вас в список донатеров FreshPal.
             5 самых щедрых будут отображаться в отдельном компоненте, на всех страницах сайта.
-            Это позволит многим узнать о наших героях! Также будет отдельная страница со всеми донатерами.
-            <br>
-            <br>
-            Чтобы мы узнали, от кого пришел донат, просим вас указать ваш id в сообщении при отправки пожертвования.
-            <br>
-            Минимальная сумма - 100 рублей. И вы точно попадете в список донатеров!
-            <br>
-            Донаты по 1 рублю рассматриваться не будут. &#128522; Иначе будет производственный ад!
-            <br>
-            <br>
-            <span style="color: #36d436;">Ваш id - {{username.username_id}}</span>
-            <br>
-            <br>
-            Для пользователей криптовалюты, для кого важна анонимность, также оставляем кошельки.
-            <br>
-            <br>
-            <span style="color: #36d436;">1J6VrpoKDaoRLjXosiWq2HSUN8qtbpCJqL</span> &mdash; BTC (сеть - BTC)
-            <br>
-            <span style="color: #36d436;">0x15262def137fa6c87d62fc6aa3a159451aa33e84</span> &mdash; ETH,USDT (сеть - ERC20)
-            <br>
-            <span style="color: #36d436;">TCPeDrjj2w6cu6vKZWBJtsLnZ3hSu6fQjz</span> &mdash; USDT (сеть - TRC20)
-            <br>
-            <span style="color: #36d436;">0x15262def137fa6c87d62fc6aa3a159451aa33e84</span> &mdash; USDT (сеть - BEP20)
-            <br>
-            <span style="color: #36d436;">EQDbL9Vw3rf3en0Lo0_MUvrq8J_-zX5AFw3FYZguRCw8FBAc</span> &mdash; Toncoin
+            Это позволит многим узнать о наших героях! Также будет отдельная страница со всеми донатерами.</div>
+            <div class="div_style text">Чтобы мы узнали, от кого пришел донат, просим вас указать ваш id в сообщении при отправки пожертвования.</div>
+            <div class="div_style text">Минимальная сумма - 100 рублей. И вы точно попадете в список донатеров!</div>
+            <div class="div_style text">Донаты по 1 рублю рассматриваться не будут. &#128522; Иначе будет производственный ад!</div>
+            <div class="div_style text"><span style="color: #36d436;">Ваш id - {{username.username_id}}</span></div>
+            <div class="div_style text">Для пользователей криптовалюты, для кого важна анонимность, также оставляем кошельки.</div>
+            <div class="div_style_cr text"><span style="color: #36d436;">1J6VrpoKDaoRLjXosiWq2HSUN8qtbpCJqL</span> &mdash; BTC (сеть - BTC)</div>
+            <div class="div_style_cr text"><span style="color: #36d436;">0x15262def137fa6c87d62fc6aa3a159451aa33e84</span> &mdash; ETH,USDT (сеть - ERC20)</div>
+            <div class="div_style_cr text"><span style="color: #36d436;">TCPeDrjj2w6cu6vKZWBJtsLnZ3hSu6fQjz</span> &mdash; USDT (сеть - TRC20)</div>
+            <div class="div_style_cr text"><span style="color: #36d436;">0x15262def137fa6c87d62fc6aa3a159451aa33e84</span> &mdash; USDT (сеть - BEP20)</div>
+            <div class="div_style_cr text"><span style="color: #36d436;">EQDbL9Vw3rf3en0Lo0_MUvrq8J_-zX5AFw3FYZguRCw8FBAc</span> &mdash; Toncoin</div>
         </div>
     </div>
 </template>
@@ -80,7 +56,19 @@ export default {
 <style scoped>
 .support_div{
     margin-top: 20px;
+    width: 540px;
 }
+.div_style{
+    margin: 0px 0px 10px 0px;
+}
+.div_style_cr{
+    margin: 0px 0px 5px 0px;
+}
+.text{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 17px; /* Размер текста */
+    font-weight: lighter; /* Светлое начертание */
 
+}
 
 </style>

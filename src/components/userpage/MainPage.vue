@@ -68,6 +68,7 @@
                         <hr>
                         <Publications
                         @update_rating="update_rating"
+                        @plus_publ="plus_publ"
                         :username="username"
                         :username_url_id="username_url_data.id"
                         />
@@ -218,6 +219,11 @@ export default {
   },
 
   methods: {
+
+    plus_publ(){
+     this.sum_sub.publications = this.sum_sub.publications + 1
+    },
+
 
     go_page(username,middle){
         var url_page = '/' + username;

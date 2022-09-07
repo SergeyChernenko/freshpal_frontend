@@ -55,6 +55,11 @@ const routes = [
     component: Home
   },
   {
+    path: '/team',
+    name: 'Team',
+    component: Home
+  },
+  {
     path: '/hashtag',
     name: 'Hashtag',
     component: Home

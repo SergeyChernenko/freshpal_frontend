@@ -42,10 +42,12 @@
             <p v-if="url == 'support'" style="color: #36d436;" class="text">Поддержка</p>
             <p v-if="url != 'support'" class="text">Поддержка</p>
         </div>
-<!--        <div class="component_style" v-on:click="logout">-->
-<!--            <div class="div_icon"><img class="icon_style" width="21" height="21" :src="$hostname+'/media/logout.svg'"></div>-->
-<!--            <p class="text">Выйти</p>-->
-<!--        </div>-->
+        <div class="component_style" v-on:click.middle="go_page('team', true)" v-on:click="go_page('team', false)">
+            <div v-if="url == 'team'" class="div_icon"><img class="icon_style" width="22" height="22" :src="$hostname+'/media/team_gr.svg'"></div>
+            <div v-if="url != 'team'" class="div_icon"><img class="icon_style" width="22" height="22" :src="$hostname+'/media/team.svg'"></div>
+            <p v-if="url == 'team'" style="color: #36d436;" class="text">О нас</p>
+            <p v-if="url != 'team'" class="text">О нас</p>
+        </div>
     </div>
 </template>
 
