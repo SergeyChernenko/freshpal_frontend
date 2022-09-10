@@ -14,7 +14,7 @@
             <div class="div_style"><a style="color: #36d436;" href="/nexus">Моя страница</a> в FreshPal. Мой личный телеграм - <a style="color: #36d436;" href="https://t.me/nexusst">nexusst.</a>
             Все новости будут дублироваться в <a style="color: #36d436;" href="https://t.me/freshpal">телеграм канале.</a></div>
             <p style="margin-top: 30px" class="p_dis">Наша команда</p>
-            <div class="team_style">
+            <div style="display: flex; margin: 0px 0px 20px 10px;">
                 <img style="border-radius: 50%" :src="$hostname+'/media/profile/1/1.png'">
                 <div style="margin-left: 30px">
                     <div style="margin-top: 30px" class="text">Черненко Сергей</div>

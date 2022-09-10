@@ -42,10 +42,10 @@
 				  this.check_token()
 			  })
 			  .catch(err => {
-				  // localStorage.removeItem('access');
-				  // localStorage.removeItem('refresh');
-				  // this.access_token = null;
-				  // this.refresh_token = null;
+				  localStorage.removeItem('access');
+				  localStorage.removeItem('refresh');
+				  this.access_token = null;
+				  this.refresh_token = null;
 			  })
       	},
         check_token(){

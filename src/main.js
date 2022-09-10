@@ -75,7 +75,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 
 Vue.prototype.$hostname = 'http://127.0.0.1:8000'
-Vue.prototype.$localhost = 'http://localhost:8080'
+//Vue.prototype.$localhost = 'http://localhost:8080'
 // Vue.prototype.$access_token = localStorage.getItem('access') || null
 Vue.prototype.$timestop = 800
 
