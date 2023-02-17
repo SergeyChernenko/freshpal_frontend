@@ -1,3 +1,5 @@
+![Снимок экрана 2023-02-17 183851](https://user-images.githubusercontent.com/44299649/219643667-5c32dd1c-7d8b-4ceb-b3ce-f4180bb3fcc2.png)
+
 # frontend
 
 ## Project setup
